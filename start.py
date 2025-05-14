@@ -1,8 +1,14 @@
 # start.py
-from chromadb.server.fastapi import FastAPIApp
+import chromadb
+from chromadb.config import Settings
 import uvicorn
 
-app = FastAPIApp()
+# Configurazione del server ChromaDB
+chroma_server = chromadb.Server(Settings(
+    chroma_api_impl="chromadb.api.fastapi.FastAPI",
+    chroma_server_host="0.0.0.0",
+    chroma_server_port=8000
+))
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    chroma_server.run()
