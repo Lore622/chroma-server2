@@ -1,3 +1,2 @@
-numpy<2.0.0
 chromadb==0.4.24
-uvicorn
+numpy<2.0.0
