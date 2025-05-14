@@ -2,9 +2,9 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Installa le dipendenze
+# Aggiorna pip e installa le dipendenze
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copia il codice dell'applicazione
 COPY . .
@@ -12,7 +12,8 @@ COPY . .
 # Crea la directory per i dati persistenti
 RUN mkdir -p chroma_data
 
-# Esponi la porta su cui il server ChromaDB ascolterà
+# Esponi la porta
+ENV PORT=8000
 EXPOSE 8000
 
 # Avvia l'applicazione
