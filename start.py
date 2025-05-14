@@ -1,21 +1,19 @@
 # start.py
-import chromadb
-from chromadb.config import Settings
-import uvicorn
 import os
+from chromadb.server import ChromaServer
 
-# Configurazione del server
-server_settings = Settings(
-    chroma_api_impl="rest",
-    chroma_server_host="0.0.0.0",
-    chroma_server_port=int(os.environ.get("PORT", 8000)),
-    chroma_server_cors_allow_origins=["*"],
-    persist_directory="chroma_data",  # Per persistere i dati
-    allow_reset=True
-)
+# Configura la porta - Render ti assegnerà una porta tramite variabile d'ambiente
+port = int(os.environ.get("PORT", 8000))
 
 # Avvia il server
-server = chromadb.Server(server_settings)
+server = ChromaServer(
+    host="0.0.0.0",
+    port=port,
+    ssl_enabled=False,
+    persist_directory="chroma_data",  # directory per dati persistenti
+    allow_reset=True,
+    cors_allow_origins=["*"]
+)
 
 if __name__ == "__main__":
     server.run()
