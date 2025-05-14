@@ -3,12 +3,16 @@ import chromadb
 from chromadb.config import Settings
 import uvicorn
 
-# Configurazione del server ChromaDB
-chroma_server = chromadb.Server(Settings(
-    chroma_api_impl="chromadb.api.fastapi.FastAPI",
+# Create server instance
+settings = Settings(
     chroma_server_host="0.0.0.0",
-    chroma_server_port=8000
-))
+    chroma_server_port=8000,
+    chroma_server_cors_allow_origins=["*"],
+    allow_reset=True,
+    anonymized_telemetry=False
+)
+
+server = chromadb.Server(settings)
 
 if __name__ == "__main__":
-    chroma_server.run()
+    server.run()
