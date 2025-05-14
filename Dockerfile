@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install chromadb
+RUN pip install chromadb==0.4.24
+
 
 EXPOSE 8000
 
